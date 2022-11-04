@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/restApi/rest_api_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:state_management/stateManagement/bloc/color_cubit.dart';
+import 'package:state_management/stateManagement/setState/set_state_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +27,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const RestApiScreen(),
+      home: BlocProvider(
+        create: (_) => ColorCubit(),
+        child: SetStateScreen(),
+      ),
     );
   }
 }
