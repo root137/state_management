@@ -8,51 +8,47 @@ class TextScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.only(
-            top: 300,
-          ),
-          child: Column(
-            children: [
-              BlocBuilder<TextCubit, bool>(builder: (context, hide) {
-                return Text(
-                  hide ? "*************" : "YOUR TEXT HERE",
-                  style: const TextStyle(fontSize: 20),
-                );
-              }),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<TextCubit>().hideText();
-                },
-                child: const Text(
-                  "Hide Text",
+      appBar: AppBar(
+        title: Text('Text Screen'),
+      ),
+      body: SingleChildScrollView(
+        child: BlocBuilder<TextCubit, TextState>(
+          builder: (context, textState) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  textState.shouldHide ? textState.virtualText : textState.realText,
                   style: TextStyle(
+                    color: Colors.black,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<TextCubit>().unHideText();
-                },
-                child: const Text(
-                  "UnHide Text",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                SizedBox(
+                  height: 20,
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    if (textState.shouldHide) {
+                      context.read<TextCubit>().hideOrUnHideText(
+                            text: 'Dipak Shrestha',
+                            shouldHide: false,
+                          );
+                    } else {
+                      context.read<TextCubit>().hideOrUnHideText(
+                            text: 'Dipak Shrestha',
+                            shouldHide: true,
+                          );
+                    }
+                  },
+                  child: Text(
+                    textState.shouldHide ? 'Un Hide Text' : 'Hide Text',
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            );
+          },
         ),
       ),
     );
