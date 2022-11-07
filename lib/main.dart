@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_management/stateManagement/bloc/blocObserver/my_bloc_observer.dart';
-import 'package:state_management/stateManagement/bloc/color_cubit.dart';
 import 'package:state_management/stateManagement/bloc/realBloc/color_bloc.dart';
-import 'package:state_management/stateManagement/bloc/realBloc/real_bloc_screen.dart';
+import 'package:state_management/stateManagement/bloc/realBloc/practiseBloc/text_cubit.dart';
+import 'package:state_management/stateManagement/bloc/realBloc/practiseBloc/text_screen.dart';
 
 void main() {
   ///setting my bloc observer here...
@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: BlocProvider(
-          create: (_) => ColorCubit(),
-          child: RealBlocScreen(),
+          create: (_) => TextObsceureCubit(),
+          child: TextScreen(),
         ),
       ),
     );
