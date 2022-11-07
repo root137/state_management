@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stacked/stacked.dart';
 import 'package:state_management/stateManagement/bloc/blocObserver/my_bloc_observer.dart';
-import 'package:state_management/stateManagement/bloc/color_cubit.dart';
 import 'package:state_management/stateManagement/bloc/realBloc/color_bloc.dart';
-import 'package:state_management/stateManagement/bloc/realBloc/real_bloc_screen.dart';
+import 'package:state_management/stateManagement/stacked/color_view_model.dart';
+import 'package:state_management/stateManagement/stacked/color_with_view_model_widget_screen.dart';
 
 void main() {
   ///setting my bloc observer here...
@@ -28,10 +29,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: BlocProvider(
-          create: (_) => ColorCubit(),
-          child: RealBlocScreen(),
+        home: ViewModelBuilder<ColorViewModel>.nonReactive(
+          viewModelBuilder: () => ColorViewModel(),
+          builder: (context, viewModel, child) {
+            return ColorWithViewModelWidgetScreen();
+          },
         ),
+        // home: ReactiveColorScreen(),
       ),
     );
   }
